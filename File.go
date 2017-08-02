@@ -1,4 +1,4 @@
-package go_utils_file
+package go_utils
 
 import (
 	"net/url"
@@ -9,6 +9,8 @@ import (
 	"os"
 	"path/filepath"
 )
+
+
 
 /*
 获取程序运行路径
