@@ -10,8 +10,6 @@ import (
 	"path/filepath"
 )
 
-
-
 /*
 获取程序运行路径
 */
@@ -37,23 +35,21 @@ func PathExists(path string) (bool, error) {
 /**
 下载文件
  */
-func DownloadFile(file_url string, path string) {
-	u, err := url.Parse(file_url)
+func DownloadFile(fileUrl string, path string, name string) {
+	_, err := url.Parse(fileUrl)
 	if err != nil {
-		log.Println("parse url failed:", file_url, err)
+		log.Println("parse url failed:", fileUrl, err)
 		return
 	}
 
-	tmp := strings.TrimLeft(u.Path, "/")
-
-	filename := path + strings.ToLower(strings.Replace(tmp, "/", "-", -1))
+	filename := path + name
 	exists, _ := PathExists(filename)
 
 	if exists {
 		return
 	}
 
-	response, err := http.Get(file_url)
+	response, err := http.Get(fileUrl)
 	if err != nil {
 		log.Println("get file_url failed:", err)
 		return
@@ -63,7 +59,7 @@ func DownloadFile(file_url string, path string) {
 
 	data, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		log.Println("read data failed:", file_url, err)
+		log.Println("read data failed:", fileUrl, err)
 		return
 	}
 	FilePutContents(filename, data)
