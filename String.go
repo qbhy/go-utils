@@ -1,6 +1,9 @@
 package utils
 
-import "crypto/md5"
+import (
+	"crypto/md5"
+	"encoding/hex"
+)
 
 // 截取字符串 start 起点下标 length 需要截取的长度
 func SubStr(str string, start int, length int) string {
@@ -36,5 +39,5 @@ func SubStr(str string, start int, length int) string {
 func Md5(str string) string {
 	h := md5.New()
 	h.Write([]byte(str))
-	return string(h.Sum(nil))
+	return hex.EncodeToString(h.Sum(nil))
 }
