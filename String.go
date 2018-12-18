@@ -1,5 +1,7 @@
 package utils
 
+import "crypto/md5"
+
 // 截取字符串 start 起点下标 length 需要截取的长度
 func SubStr(str string, start int, length int) string {
 	rs := []rune(str)
@@ -29,4 +31,10 @@ func SubStr(str string, start int, length int) string {
 	}
 
 	return string(rs[start:end])
+}
+
+func Md5(str string) string {
+	h := md5.New()
+	h.Write([]byte(str))
+	return string(h.Sum(nil))
 }
